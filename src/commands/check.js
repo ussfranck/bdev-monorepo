@@ -8,10 +8,10 @@ exports.checkCommand = new commander_1.Command("check")
     .action(function () {
     try {
         var nodeVersion = (0, child_process_1.execSync)('node -v', { stdio: 'ignore' }).toString().trim();
-        console.log("\u2705 Node.js d\u00E9tect\u00E9 : ".concat(nodeVersion));
+        console.log("\u2705 Node.js detected : ".concat(nodeVersion));
     }
     catch (_a) {
-        console.error("❌ Node.js non installé");
+        console.error("❌ Node.js unvailable on your computer");
         return;
     }
     try {
@@ -19,6 +19,6 @@ exports.checkCommand = new commander_1.Command("check")
         console.log("\u2705 PNPM d\u00E9tect\u00E9 : ".concat(pnpmVersion));
     }
     catch (_b) {
-        console.error("❌ PNPM non installé");
+        console.error("❌ PNPM is not installed on your computer");
     }
 });
