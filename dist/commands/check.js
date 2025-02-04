@@ -7,11 +7,11 @@ exports.checkCommand = new commander_1.Command("check")
     .description("Vérifie si Node.js et PNPM sont installés")
     .action(() => {
     try {
-        const nodeVersion = (0, child_process_1.execSync)('node -v', { stdio: 'pipe' }).toString().trim();
-        console.log(`✅ Node.js détecté : ${nodeVersion}`);
+        const nodeVersion = (0, child_process_1.execSync)('node -v', { stdio: 'ignore' }).toString().trim();
+        console.log(`✅ Node.js detected : ${nodeVersion}`);
     }
     catch (_a) {
-        console.error("❌ Node.js non installé");
+        console.error("❌ Node.js unvailable on your computer");
         return;
     }
     try {
@@ -19,6 +19,6 @@ exports.checkCommand = new commander_1.Command("check")
         console.log(`✅ PNPM détecté : ${pnpmVersion}`);
     }
     catch (_b) {
-        console.error("❌ PNPM non installé");
+        console.error("❌ PNPM is not installed on your computer");
     }
 });
