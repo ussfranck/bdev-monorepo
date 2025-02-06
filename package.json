@@ -1,22 +1,26 @@
 {
-	"name": "bdev-monorepo",
-	"version": "1.0.0",
-	"description": "This is a minimal tool to manage monorepo",
-  "main": "bin/cli.js",
-	"bin": {
-		"bdev": "bin/cli.js"
-	},
-	"scripts": {
-    "build-release": "pkg -t node18-win-x64 -o bdev.exe -c package.json bin/cli.js",
-    "pre-build": "tsc bin/cli.ts && tsc src/commands/*.ts"
+  "name": "bdev-monorepo",
+  "version": "1.0.0",
+  "description": "This is a minimal tool to manage monorepo",
+  "main": "dist/bin/cli.js",
+  "bin": {
+    "bdev": "dist/bin/cli.js"
   },
-	"keywords": [],
-	"author": "USS",
-	"license": "ISC",
-	"dependencies": {
-		"@types/node": "^22.13.1",
-		"commander": "^13.1.0",
-		"ts-node": "^10.9.2",
-		"typescript": "^5.7.3"
-	}
+  "pkg": {
+    "scripts": "dist/**/*.js"
+  },
+  "scripts": {
+    "build": "pkg dist/bin/cli.js --output build.exe --targets node18-win-x64",
+    "pre-build": "tsc",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [],
+  "author": "USS",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^22.13.1",
+    "commander": "^13.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
 }
