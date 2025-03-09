@@ -1,42 +1,45 @@
 import {Command} from "commander"
-import inquirer from "inquirer"
 import {execSync} from "child_process"
 import * as fs from "fs"
 import * as path from "path"
 import ora from "ora"
+import inquirer from "inquirer"
+import chalk from "chalk"
 
-export const initMonorepo = new Command("hello")
+const WELCOME_STR = "\t🚀You're creating new PNPM Monorepo using BDEV-MONOREPO🚀"
+
+export const initMonorepo = new Command("init")
   .description("Initialize monorepo with PNPM Workspace, build 02 main apps NextJS in Frontend and NestJS for backend")
   .action(async () => {
-    console.log("\n----------------------------------------------")
-    console.log("\t\t🚀You're creating new PNPM Monorepo using BDEV-MONOREPO")
-    console.log("\tConditions:\n\t-Language: TS\n\t-Frontend App: NextJS (latest)\n\t-Backend: NestJS (latest 15.1.x)\n\t-TailwindCSS: Yes!\n\t-Monorepo Manager: TurboRepo(By Vercel)")
-    console.log("\n----------------------------------------------")
+
+    console.log(WELCOME_STR)
+    console.log("HEY: This is a personal project, extensibility is welcome🫡 the monorepo will be created with the following Stack🍷:")
+    console.log("\n  The minimal stack in question:\n\t• Language: TS(Not JS in the real project)\n\t• Frontend App: NextJS (latest version)\n\t• Backend: NestJS (latest version)\n\t• TailwindCSS V4: YES!\n\t• Prisma ORM: YES!\n\t• Monorepo Manager: TurboRepo\n\t• Package Manager: PNPM, is required!\n")
 
     const userInputs = await inquirer.prompt([
       {
         type: "input",
         name: "monorepoName",
-        message: "Enter your monorepo name (e.g: my-monorepo) :",
+        message: "Enter your monorepo name:",
         default: "my-monorepo",
         required: true
       },
       {
         type: "input",
         name: "monorepoPath",
-        message: "Enter the location of the monorepo on the disk (e.g: /path/to/my-folder, leave blank for current folder) :",
+        message: "Enter the location of the monorepo on the disk (leave blank for current folder):",
         default: process.cwd(),
       },
       {
         type: "input",
         name: "frontendName",
-        message: "Enter the folder name for the frontend app (e.g: web) :",
+        message: "Enter the folder name for the frontend app (e.g: web):",
         default: "web",
       },
       {
         type: "input",
         name: "backendName",
-        message: "Enter the folder name for the backend app (e.g: api) :",
+        message: "Enter the folder name for the backend app (e.g: api):",
         default: "api",
       },
       {
@@ -132,7 +135,7 @@ export const initMonorepo = new Command("hello")
         export default function Home() {
           return (
             <div className="min-h-screen bg-blue-500 text-white text-center py-10">
-              <h1 className="text-4xl">NextJS App Router App!</h1>
+              <h1 className="text-7xl">Next.js App Router App! Text In 7xl.</h1>
             </div>
           )
     `
@@ -219,4 +222,8 @@ export const initMonorepo = new Command("hello")
     console.log(`\n🎉 Monorepo ${monorepoName} initialized!`);
     console.log(`- Frontend : cd apps/${frontendName} && pnpm dev`);
     console.log(`- Backend : cd apps/${backendName} && pnpm start:dev`);
+    console.log(
+      "\n🤝 Love this tool? Contribute on GitHub: ",
+      chalk.blue.underline("https://github.com/ussfranck/bdev-monorepo")
+    );
   })
